@@ -1,0 +1,14 @@
+C:\Work\WpEmpresas\WpEmpresas.Services\bin\Debug\netcoreapp2.1\WpEmpresas.Entities.dll
+C:\Work\WpEmpresas\WpEmpresas.Services\bin\Debug\netcoreapp2.1\WpEmpresas.Infraestructure.dll
+C:\Work\WpEmpresas\WpEmpresas.Services\obj\Debug\netcoreapp2.1\WpEmpresas.Services.csprojAssemblyReference.cache
+C:\Work\WpEmpresas\WpEmpresas.Services\obj\Debug\netcoreapp2.1\WpEmpresas.Services.csproj.CoreCompileInputs.cache
+C:\Work\WpEmpresas\WpEmpresas.Services\obj\Debug\netcoreapp2.1\WpEmpresas.Services.AssemblyInfoInputs.cache
+C:\Work\WpEmpresas\WpEmpresas.Services\obj\Debug\netcoreapp2.1\WpEmpresas.Services.AssemblyInfo.cs
+C:\Work\WpEmpresas\WpEmpresas.Services\bin\Debug\netcoreapp2.1\WpEmpresas.Services.deps.json
+C:\Work\WpEmpresas\WpEmpresas.Services\bin\Debug\netcoreapp2.1\WpEmpresas.Services.dll
+C:\Work\WpEmpresas\WpEmpresas.Services\bin\Debug\netcoreapp2.1\WpEmpresas.Services.pdb
+C:\Work\WpEmpresas\WpEmpresas.Services\bin\Debug\netcoreapp2.1\WpEmpresas.Infraestructure.pdb
+C:\Work\WpEmpresas\WpEmpresas.Services\bin\Debug\netcoreapp2.1\WpEmpresas.Entities.pdb
+C:\Work\WpEmpresas\WpEmpresas.Services\obj\Debug\netcoreapp2.1\WpEmpresas.Services.csproj.CopyComplete
+C:\Work\WpEmpresas\WpEmpresas.Services\obj\Debug\netcoreapp2.1\WpEmpresas.Services.dll
+C:\Work\WpEmpresas\WpEmpresas.Services\obj\Debug\netcoreapp2.1\WpEmpresas.Services.pdb
