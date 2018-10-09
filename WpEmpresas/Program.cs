@@ -14,11 +14,23 @@ namespace WpEmpresas
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
-        }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            MainAsync().Wait();
+
+        }
+        static async Task MainAsync()
+        {
+            var url = await AuxNotStatic.GetInfoMotorAux("wpEmpresas", 1);
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls(url.Url)
+                //.UseUrls("http://localhost:5000")
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .Build();
+
+            host.Run();
+        }
     }
 }
