@@ -103,6 +103,12 @@ namespace WpEmpresas.Domains
                         entity.DateAlteracao = DateTime.UtcNow;
                         entity.Ativo = true;
                         entity.ID = _repository.Add(entity);
+                        entity.Endereco.EmpresaId = entity.ID;
+
+                        foreach (var c in entity.Contatos)
+                        {
+                            c.EmpresaId = entity.ID;
+                        }
                         break;
                     default:
                         entity = await UpdateAsync(entity, token);

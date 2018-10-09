@@ -681,7 +681,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gilbe_000\\.nuget\\packages\\": {},
+    "C:\\Users\\Dev01\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -690,14 +690,14 @@
       "projectUniqueName": "C:\\Work\\WpEmpresas\\WpEmpresas.Entities\\WpEmpresas.Entities.csproj",
       "projectName": "WpEmpresas.Entities",
       "projectPath": "C:\\Work\\WpEmpresas\\WpEmpresas.Entities\\WpEmpresas.Entities.csproj",
-      "packagesPath": "C:\\Users\\gilbe_000\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Dev01\\.nuget\\packages\\",
       "outputPath": "C:\\Work\\WpEmpresas\\WpEmpresas.Entities\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\gilbe_000\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dev01\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

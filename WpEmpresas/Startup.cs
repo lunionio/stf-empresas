@@ -22,7 +22,11 @@ namespace WpEmpresas
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<EmpresaDomain>(); 
+            services.AddTransient<EnderecoDomain>();
+            services.AddTransient<ContatoDomain>();
             services.AddTransient<EmpresaRepository>();
+            services.AddTransient<EnderecoRepository>();
+            services.AddTransient<ContatoRepository>();
             services.AddTransient<SegurancaService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

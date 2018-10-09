@@ -85,15 +85,33 @@ namespace WpEmpresas.Infraestructure
         /// Adiciona um item na base de dados 
         /// </summary>
         /// <param name="items">Baseado na classe operante</param>
-        public virtual int Add(params T[] items)
+        public virtual int Add(T item)
         {
             var context = new WpEmpresasContext();
 
-            var item = items.FirstOrDefault();
             context.Entry(item).State = EntityState.Added;
             context.SaveChanges();
 
             return (item as dynamic).ID;
+        }
+
+        /// <summary>
+        /// Adiciona um item na base de dados 
+        /// </summary>
+        /// <param name="items">Baseado na classe operante</param>
+        public virtual void Add(params T[] items)
+        {
+            var context = new WpEmpresasContext();
+
+            IList<int> ids = new List<int>();
+
+            foreach(var i in items)
+            {
+                context.Entry(i).State = EntityState.Added;
+                ids.Add((i as dynamic).ID);
+            }
+
+            context.SaveChanges();
         }
         /// <summary>
         /// Atualiza um item na base de dados 

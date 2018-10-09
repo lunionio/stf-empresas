@@ -6,5 +6,7 @@ using WpEmpresas.Entities;
 namespace WpEmpresas.Infraestructure
 {
     public class EmpresaRepository : Repository<Empresa>
-    { }
+    {
+
+    }
 }

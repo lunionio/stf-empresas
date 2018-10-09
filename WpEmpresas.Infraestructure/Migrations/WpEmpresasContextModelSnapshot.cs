@@ -19,7 +19,147 @@ namespace WpEmpresas.Infraestructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("WpEmpresas.Entities.Contato", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo");
+
+                    b.Property<string>("ContatoInfo")
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<DateTime>("DataCriacao");
+
+                    b.Property<DateTime>("DateAlteracao");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("EmpresaId");
+
+                    b.Property<int>("IdCliente");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("Status");
+
+                    b.Property<int>("TipoId");
+
+                    b.Property<int>("UsuarioCriacao");
+
+                    b.Property<int>("UsuarioEdicao");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.HasIndex("TipoId");
+
+                    b.ToTable("Contatos");
+                });
+
             modelBuilder.Entity("WpEmpresas.Entities.Empresa", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo");
+
+                    b.Property<string>("CNAE_S")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("CNPJ")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("DataCriacao");
+
+                    b.Property<DateTime>("DateAlteracao");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("IdCliente");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("RazaoSocial");
+
+                    b.Property<int>("Status");
+
+                    b.Property<int>("UsuarioCriacao");
+
+                    b.Property<int>("UsuarioEdicao");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Empresas");
+                });
+
+            modelBuilder.Entity("WpEmpresas.Entities.Endereco", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo");
+
+                    b.Property<string>("Bairro")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("CEP")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("Complemento")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime>("DataCriacao");
+
+                    b.Property<DateTime>("DateAlteracao");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("EmpresaId");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<int>("IdCliente");
+
+                    b.Property<int>("IdUsuario");
+
+                    b.Property<string>("Local")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<int>("NumeroLocal");
+
+                    b.Property<int>("Status");
+
+                    b.Property<int>("UsuarioCriacao");
+
+                    b.Property<int>("UsuarioEdicao");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("EmpresaId")
+                        .IsUnique();
+
+                    b.ToTable("Enderecos");
+                });
+
+            modelBuilder.Entity("WpEmpresas.Entities.Tipo", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -47,7 +187,28 @@ namespace WpEmpresas.Infraestructure.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Empresas");
+                    b.ToTable("Tipos");
+                });
+
+            modelBuilder.Entity("WpEmpresas.Entities.Contato", b =>
+                {
+                    b.HasOne("WpEmpresas.Entities.Empresa", "Empresa")
+                        .WithMany("Contatos")
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WpEmpresas.Entities.Tipo", "Tipo")
+                        .WithMany()
+                        .HasForeignKey("TipoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WpEmpresas.Entities.Endereco", b =>
+                {
+                    b.HasOne("WpEmpresas.Entities.Empresa", "Empresa")
+                        .WithOne("Endereco")
+                        .HasForeignKey("WpEmpresas.Entities.Endereco", "EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
