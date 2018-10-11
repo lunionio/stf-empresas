@@ -105,9 +105,12 @@ namespace WpEmpresas.Domains
                         entity.ID = _repository.Add(entity);
                         entity.Endereco.EmpresaId = entity.ID;
 
-                        foreach (var c in entity.Contatos)
+                        if (entity.Contatos != null)
                         {
-                            c.EmpresaId = entity.ID;
+                            foreach (var c in entity.Contatos)
+                            {
+                                c.EmpresaId = entity.ID;
+                            }
                         }
                         break;
                     default:

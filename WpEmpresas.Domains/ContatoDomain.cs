@@ -229,21 +229,24 @@ namespace WpEmpresas.Domains
             {
                 await _segService.ValidateTokenAsync(token);
 
-                switch (entities.FirstOrDefault().ID)
+                if (entities != null && entities.Count > 0)
                 {
-                    case 0:
-                        foreach (var c in entities)
-                        {
-                            c.DataCriacao = DateTime.UtcNow;
-                            c.DateAlteracao = DateTime.UtcNow;
-                            c.Ativo = true;
-                        }
-                        
-                        _repository.Add(entities.ToArray());
-                        break;
-                    default:
-                        await UpdateAsync(entities, token);
-                        break;
+                    switch (entities.FirstOrDefault().ID)
+                    {
+                        case 0:
+                            foreach (var c in entities)
+                            {
+                                c.DataCriacao = DateTime.UtcNow;
+                                c.DateAlteracao = DateTime.UtcNow;
+                                c.Ativo = true;
+                            }
+
+                            _repository.Add(entities.ToArray());
+                            break;
+                        default:
+                            await UpdateAsync(entities, token);
+                            break;
+                    }
                 }
             }
             catch (ServiceException e)
