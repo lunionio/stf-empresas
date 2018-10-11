@@ -1,9 +1,0 @@
-C:\Work\WpEmpresas\WpEmpresas.Entities\obj\Debug\netcoreapp2.1\WpEmpresas.Entities.csprojAssemblyReference.cache
-C:\Work\WpEmpresas\WpEmpresas.Entities\obj\Debug\netcoreapp2.1\WpEmpresas.Entities.csproj.CoreCompileInputs.cache
-C:\Work\WpEmpresas\WpEmpresas.Entities\obj\Debug\netcoreapp2.1\WpEmpresas.Entities.AssemblyInfoInputs.cache
-C:\Work\WpEmpresas\WpEmpresas.Entities\obj\Debug\netcoreapp2.1\WpEmpresas.Entities.AssemblyInfo.cs
-C:\Work\WpEmpresas\WpEmpresas.Entities\bin\Debug\netcoreapp2.1\WpEmpresas.Entities.deps.json
-C:\Work\WpEmpresas\WpEmpresas.Entities\bin\Debug\netcoreapp2.1\WpEmpresas.Entities.dll
-C:\Work\WpEmpresas\WpEmpresas.Entities\bin\Debug\netcoreapp2.1\WpEmpresas.Entities.pdb
-C:\Work\WpEmpresas\WpEmpresas.Entities\obj\Debug\netcoreapp2.1\WpEmpresas.Entities.dll
-C:\Work\WpEmpresas\WpEmpresas.Entities\obj\Debug\netcoreapp2.1\WpEmpresas.Entities.pdb
