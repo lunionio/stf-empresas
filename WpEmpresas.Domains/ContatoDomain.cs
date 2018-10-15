@@ -44,17 +44,16 @@ namespace WpEmpresas.Domains
             }
         }
 
-        public async Task DeleteAsync(IList<Contato> entities, string token)
+        public async Task DeleteAsync(int empresaId, string token)
         {
             try
             {
                 await _segService.ValidateTokenAsync(token);
 
-                if (entities != null && entities.Count > 0)
-                {
-                    var firstContato = entities.FirstOrDefault();
-                    var contatos = _repository.GetList(c => c.EmpresaId.Equals(firstContato.EmpresaId));
+                var contatos = _repository.GetList(c => c.EmpresaId.Equals(empresaId));
 
+                if (contatos != null && contatos.Count > 0)
+                {
                     foreach (var c in contatos)
                     {
                         c.Status = 9;

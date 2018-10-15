@@ -196,5 +196,33 @@ namespace WpEmpresas.Domains
                 throw new EnderecoException("Não foi possível recuperar o endereço da empresa. Entre em contato com o suporte.", e);
             }
         }
+
+        public async Task DeleteAsync(int empresaId, string token)
+        {
+            try
+            {
+                await _segService.ValidateTokenAsync(token);
+                var endereco = _edRepository.GetList(e => e.EmpresaId.Equals(empresaId)).SingleOrDefault();
+
+                if (endereco != null)
+                {
+                    endereco.Status = 9;
+                    endereco.Ativo = false;
+                    _edRepository.Update(endereco);
+                }
+            }
+            catch (ServiceException e)
+            {
+                throw e;
+            }
+            catch (InvalidTokenException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw new EnderecoException("Não foi possível remover o endereço da oportunidade.", e);
+            }
+        }
     }
 }

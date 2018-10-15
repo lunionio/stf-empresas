@@ -93,8 +93,8 @@ namespace WpEmpresas.Controllers
             try
             {
                 await _domain.DeleteAsync(empresa, token);
-                await _edDomain.DeleteAsync(empresa.Endereco, token);
-                await _cDomain.DeleteAsync(empresa.Contatos, token);
+                await _edDomain.DeleteAsync(empresa.ID, token);
+                await _cDomain.DeleteAsync(empresa.ID, token);
 
                 return Ok("Empresa removida com sucesso.");
             }
