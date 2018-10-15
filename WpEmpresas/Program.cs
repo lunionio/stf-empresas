@@ -24,8 +24,8 @@ namespace WpEmpresas
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseUrls(url.Url)
-                //.UseUrls("http://localhost:5000")
+                //.UseUrls(url.Url)
+                .UseUrls("http://localhost:5334")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();

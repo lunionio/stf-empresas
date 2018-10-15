@@ -50,13 +50,19 @@ namespace WpEmpresas.Domains
             {
                 await _segService.ValidateTokenAsync(token);
 
-                foreach (var c in entities)
+                if (entities != null && entities.Count > 0)
                 {
-                    c.Status = 9;
-                    c.Ativo = false;
+                    var firstContato = entities.FirstOrDefault();
+                    var contatos = _repository.GetList(c => c.EmpresaId.Equals(firstContato.EmpresaId));
+
+                    foreach (var c in contatos)
+                    {
+                        c.Status = 9;
+                        c.Ativo = false;
+                    }
+
+                    _repository.Update(contatos.ToArray());                    
                 }
-                
-                _repository.Update(entities.ToArray());
             }
             catch (ServiceException e)
             {

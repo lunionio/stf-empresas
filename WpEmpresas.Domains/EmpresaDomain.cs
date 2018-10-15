@@ -26,9 +26,10 @@ namespace WpEmpresas.Domains
             try
             {
                 await _segService.ValidateTokenAsync(token);
-                entity.Status = 9;
-                entity.Ativo = false;
-                _repository.Update(entity);
+                var empresa = _repository.GetList(e => e.ID.Equals(entity.ID)).SingleOrDefault();
+                empresa.Status = 9;
+                empresa.Ativo = false;
+                _repository.Update(empresa);
             }
             catch (InvalidTokenException e)
             {

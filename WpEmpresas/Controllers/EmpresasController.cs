@@ -87,7 +87,7 @@ namespace WpEmpresas.Controllers
             }
         }
 
-        [HttpDelete("{token}")]
+        [HttpPost("Delete/{token}")]
         public async Task<IActionResult> DeleteAsync([FromRoute]string token, [FromBody]Empresa empresa)
         {
             try

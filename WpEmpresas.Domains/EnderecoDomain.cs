@@ -27,9 +27,10 @@ namespace WpEmpresas.Domains
             try
             {
                 await _segService.ValidateTokenAsync(token);
-                entity.Status = 9;
-                entity.Ativo = false;
-                _edRepository.Update(entity);
+                var endereco = _edRepository.GetList(e => e.EmpresaId.Equals(entity.EmpresaId)).SingleOrDefault();
+                endereco.Status = 9;
+                endereco.Ativo = false;
+                _edRepository.Update(endereco);
             }
             catch (ServiceException e)
             {
