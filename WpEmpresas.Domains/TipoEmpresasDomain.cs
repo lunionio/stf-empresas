@@ -27,9 +27,27 @@ namespace WpEmpresas.Domains
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<TipoEmpresa>> GetAllAsync(int idCliente, string token)
+        public async Task<IEnumerable<TipoEmpresa>> GetAllAsync(int idCliente, string token)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _segService.ValidateTokenAsync(token);
+                var result = _repository.GetList(te => te.IdCliente.Equals(idCliente) && te.Ativo);
+
+                return result;
+            }
+            catch (InvalidTokenException e)
+            {
+                throw e;
+            }
+            catch (ServiceException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw new EmpresaException("Não foi possível recuperar a lista de tipos de empresas.", e);
+            }
         }
 
         public async Task<IEnumerable<TipoEmpresa>> GetAllAsync(IEnumerable<int> ids, string token)
