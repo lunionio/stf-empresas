@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WpEmpresas.Infraestructure;
 
 namespace WpEmpresas.Infraestructure.Migrations
 {
     [DbContext(typeof(WpEmpresasContext))]
-    partial class WpEmpresasContextModelSnapshot : ModelSnapshot
+    [Migration("20181126190006_Telefones")]
+    partial class Telefones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,8 +78,6 @@ namespace WpEmpresas.Infraestructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(20)");
 
-                    b.Property<int>("CodigoExterno");
-
                     b.Property<DateTime>("DataCriacao");
 
                     b.Property<DateTime>("DateAlteracao");
@@ -96,15 +96,11 @@ namespace WpEmpresas.Infraestructure.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<int>("TipoEmpresaId");
-
                     b.Property<int>("UsuarioCriacao");
 
                     b.Property<int>("UsuarioEdicao");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("TipoEmpresaId");
 
                     b.ToTable("Empresas");
                 });
@@ -154,8 +150,6 @@ namespace WpEmpresas.Infraestructure.Migrations
                     b.Property<int>("NumeroLocal");
 
                     b.Property<int>("Status");
-
-                    b.Property<string>("Uf");
 
                     b.Property<int>("UsuarioCriacao");
 
@@ -239,37 +233,6 @@ namespace WpEmpresas.Infraestructure.Migrations
                     b.ToTable("Tipos");
                 });
 
-            modelBuilder.Entity("WpEmpresas.Entities.TipoEmpresa", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Ativo");
-
-                    b.Property<DateTime>("DataCriacao");
-
-                    b.Property<DateTime>("DateAlteracao");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<int>("IdCliente");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<int>("Status");
-
-                    b.Property<int>("UsuarioCriacao");
-
-                    b.Property<int>("UsuarioEdicao");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("TipoEmpresas");
-                });
-
             modelBuilder.Entity("WpEmpresas.Entities.Contato", b =>
                 {
                     b.HasOne("WpEmpresas.Entities.Empresa", "Empresa")
@@ -280,14 +243,6 @@ namespace WpEmpresas.Infraestructure.Migrations
                     b.HasOne("WpEmpresas.Entities.Tipo", "Tipo")
                         .WithMany()
                         .HasForeignKey("TipoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WpEmpresas.Entities.Empresa", b =>
-                {
-                    b.HasOne("WpEmpresas.Entities.TipoEmpresa", "TipoEmpresa")
-                        .WithMany()
-                        .HasForeignKey("TipoEmpresaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

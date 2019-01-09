@@ -7,8 +7,10 @@ namespace WpEmpresas.Infraestructure
     {
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Tipo> Tipos { get; set; }
+        public DbSet<TipoEmpresa> TipoEmpresas { get; set; }
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Telefone> Telefones { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,6 +28,13 @@ namespace WpEmpresas.Infraestructure
                 ep.Property(e => e.Descricao).HasColumnType("varchar(200)");
                 ep.Property(e => e.CNAE_S).HasColumnType("varchar(100)");
                 ep.Property(e => e.CNPJ).HasColumnType("varchar(20)");
+            });
+
+            modelBuilder.Entity<Telefone>(tel =>
+            {
+                tel.Property(t => t.Nome).HasColumnType("varchar(200)");
+                tel.Property(t => t.Descricao).HasColumnType("varchar(200)");
+                tel.Property(t => t.Numero).HasColumnType("varchar(200)");
             });
 
             modelBuilder.Entity<Tipo>(tp => 
@@ -51,6 +60,12 @@ namespace WpEmpresas.Infraestructure
                 ed.Property(e => e.Bairro).HasColumnType("varchar(20)");
                 ed.Property(e => e.Local).HasColumnType("varchar(50)");
                 ed.Property(e => e.Complemento).HasColumnType("varchar(100)");
+            });
+
+            modelBuilder.Entity<TipoEmpresa>(te =>
+            {
+                te.Property(x => x.Descricao).HasColumnType("varchar(200)");
+                te.Property(x => x.Nome).HasColumnType("varchar(200)");
             });
         }
     }

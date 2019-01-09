@@ -26,8 +26,10 @@ namespace WpEmpresas
             services.AddTransient<ContatoDomain>();
             services.AddTransient<EmpresaRepository>();
             services.AddTransient<EnderecoRepository>();
-            services.AddTransient<ContatoRepository>();
+            services.AddTransient<ContatoRepository>(); 
             services.AddTransient<SegurancaService>();
+            services.AddTransient<TelefoneDomain>();
+            services.AddTransient<TelefoneRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

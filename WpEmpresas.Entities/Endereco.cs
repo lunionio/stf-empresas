@@ -14,6 +14,7 @@ namespace WpEmpresas.Entities
         public int NumeroLocal { get; set; }
         public string Complemento { get; set; }
         public int IdUsuario { get; set; }
+        public string Uf { get; set; }
 
         public Empresa Empresa { get; set; }
         public int EmpresaId { get; set; }

@@ -50,7 +50,7 @@ namespace WpEmpresas.Domains
             try
             {
                 await _segService.ValidateTokenAsync(token);
-                var result = _repository.GetList(e => e.IdCliente.Equals(idCliente));
+                var result = _repository.GetList(e => e.IdCliente.Equals(idCliente) && e.Ativo);
 
                 return result;
             }
@@ -105,6 +105,7 @@ namespace WpEmpresas.Domains
                         entity.Ativo = true;
                         entity.ID = _repository.Add(entity);
                         entity.Endereco.EmpresaId = entity.ID;
+                        entity.Telefone.EmpresaId = entity.ID;
 
                         if (entity.Contatos != null)
                         {

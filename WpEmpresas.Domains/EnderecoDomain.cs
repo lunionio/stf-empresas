@@ -155,8 +155,8 @@ namespace WpEmpresas.Domains
         {
             try
             {
-                await _segService.ValidateTokenAsync(token);
-                var enderecos = _edRepository.GetList(e => empresasIds.Contains(e.EmpresaId));
+                //await _segService.ValidateTokenAsync(token);
+                var enderecos = _edRepository.GetList(e => empresasIds.Contains(e.EmpresaId) && e.Ativo);
                 return enderecos;
             }
             catch (ServiceException e)
@@ -173,7 +173,7 @@ namespace WpEmpresas.Domains
             }
         }
 
-        public async Task<Endereco> GetByEmpresaId(int empresaId, int idCliente, string token)
+        public async Task<Endereco> GetByEmpresaIdAsync(int empresaId, int idCliente, string token)
         {
             try
             {

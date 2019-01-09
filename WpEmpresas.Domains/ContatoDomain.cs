@@ -104,8 +104,8 @@ namespace WpEmpresas.Domains
         {
             try
             {
-                await _segService.ValidateTokenAsync(token);
-                var contatos = _repository.GetList(c => empresasIds.Contains(c.EmpresaId));
+                //await _segService.ValidateTokenAsync(token);
+                var contatos = _repository.GetList(c => empresasIds.Contains(c.EmpresaId) && c.Ativo);
 
                 return contatos;
             }
@@ -180,7 +180,7 @@ namespace WpEmpresas.Domains
             }
         }
 
-        public async Task<IEnumerable<Contato>> GetByEmpresaId(int empresaId, int idCliente, string token)
+        public async Task<IEnumerable<Contato>> GetByEmpresaIdAsync(int empresaId, int idCliente, string token)
         {
             try
             {
