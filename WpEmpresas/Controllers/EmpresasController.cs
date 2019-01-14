@@ -34,10 +34,10 @@ namespace WpEmpresas.Controllers
             try
             {
                 var empresas = await _domain.GetAllAsync(idCliente, token);
-                var enderecos = await _edDomain.GetAllAsync(empresas.Select(e => e.ID), token);
-                var contatos = await _cDomain.GetAllAsync(empresas.Select(e => e.ID), token);
-                var telefones = await _tDomain.GetAllAsync(empresas.Select(e => e.ID), token);
-                var tipos = await _teDomain.GetAllAsync(empresas.Select(e => e.TipoEmpresaId), token);
+                var enderecos = _edDomain.GetAll(empresas.Select(e => e.ID), token);
+                var contatos = _cDomain.GetAll(empresas.Select(e => e.ID), token);
+                var telefones = _tDomain.GetAll(empresas.Select(e => e.ID), token);
+                var tipos = _teDomain.GetAll(empresas.Select(e => e.TipoEmpresaId), token);
 
                 foreach (var empresa in empresas)
                 {

@@ -50,11 +50,11 @@ namespace WpEmpresas.Domains
             }
         }
 
-        public async Task<IEnumerable<TipoEmpresa>> GetAllAsync(IEnumerable<int> ids, string token)
+        public IEnumerable<TipoEmpresa> GetAll(IEnumerable<int> ids, string token)
         {
             try
             {
-                await _segService.ValidateTokenAsync(token);
+                //await _segService.ValidateTokenAsync(token);
                 var result = _repository.GetList(te => ids.Contains(te.ID) && te.Ativo);
 
                 return result;

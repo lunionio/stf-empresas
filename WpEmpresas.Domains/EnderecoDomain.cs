@@ -151,7 +151,7 @@ namespace WpEmpresas.Domains
             }
         }
 
-        public async Task<IEnumerable<Endereco>> GetAllAsync(IEnumerable<int> empresasIds, string token)
+        public IEnumerable<Endereco> GetAll(IEnumerable<int> empresasIds, string token)
         {
             try
             {

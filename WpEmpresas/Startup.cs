@@ -20,7 +20,7 @@ namespace WpEmpresas
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {            
             services.AddTransient<EmpresaDomain>(); 
             services.AddTransient<EnderecoDomain>();
             services.AddTransient<ContatoDomain>();
@@ -29,7 +29,9 @@ namespace WpEmpresas
             services.AddTransient<ContatoRepository>(); 
             services.AddTransient<SegurancaService>();
             services.AddTransient<TelefoneDomain>();
-            services.AddTransient<TelefoneRepository>();
+            services.AddTransient<TelefoneRepository>(); 
+            services.AddTransient<TipoEmpresasDomain>();
+            services.AddTransient<TipoEmpresaRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

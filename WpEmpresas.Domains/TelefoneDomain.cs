@@ -124,7 +124,7 @@ namespace WpEmpresas.Domains
             }
         }
 
-        public async Task<IEnumerable<Telefone>> GetAllAsync(IEnumerable<int> empresasIds, string token)
+        public IEnumerable<Telefone> GetAll(IEnumerable<int> empresasIds, string token)
         {
             try
             {
