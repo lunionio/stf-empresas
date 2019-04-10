@@ -50,7 +50,30 @@ namespace WpEmpresas.Domains
             try
             {
                 await _segService.ValidateTokenAsync(token);
-                var result = _repository.GetList(e => e.IdCliente.Equals(idCliente) && e.Ativo);
+                var result = _repository.GetList(e => e.IdCliente.Equals(idCliente));
+
+                return result;
+            }
+            catch (InvalidTokenException e)
+            {
+                throw e;
+            }
+            catch (ServiceException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw new EmpresaException("Não foi possível recuperar a lista de empresas.", e);
+            }
+        }
+
+        public async Task<IEnumerable<Empresa>> GetAllAsync(int idCliente, int tipoId, string token)
+        {
+            try
+            {
+                await _segService.ValidateTokenAsync(token);
+                var result = _repository.GetList(e => e.IdCliente.Equals(idCliente) && e.TipoEmpresaId.Equals(tipoId));
 
                 return result;
             }
@@ -73,8 +96,7 @@ namespace WpEmpresas.Domains
             try
             {
                 await _segService.ValidateTokenAsync(token);
-                var result = _repository.GetList(e => e.ID.Equals(entityId)
-                        && e.Ativo && e.IdCliente.Equals(idCliente)).SingleOrDefault();
+                var result = _repository.GetList(e => e.ID.Equals(entityId) && e.IdCliente.Equals(idCliente)).SingleOrDefault();
 
                 return result;
             }
@@ -105,7 +127,11 @@ namespace WpEmpresas.Domains
                         entity.Ativo = true;
                         entity.ID = _repository.Add(entity);
                         entity.Endereco.EmpresaId = entity.ID;
-                        entity.Telefone.EmpresaId = entity.ID;
+
+                        if (entity.Telefone != null)
+                        {
+                            entity.Telefone.EmpresaId = entity.ID;
+                        }
 
                         if (entity.Contatos != null)
                         {

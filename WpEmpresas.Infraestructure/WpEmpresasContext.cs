@@ -11,11 +11,15 @@ namespace WpEmpresas.Infraestructure
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
+        public DbSet<Responsavel> Responsavel { get; set; }
+        public DbSet<Especialidade> Especialidades { get; set; }
+        public DbSet<EmpresaXEspecialidade> EmpresasXEspecialidades { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(@"Data Source=34.226.175.244;Initial Catalog=WebPixEmpresas;Persist Security Info=True;User ID=sa;Password=StaffPro@123;");
+            //optionsBuilder.UseSqlServer(@"Server=WIN-2V8OOHSRMOD;Database=WebPixEmpresas;Trusted_Connection=True;Integrated Security = True;");
+            optionsBuilder.UseSqlServer(@"Data Source=18.229.17.132;Initial Catalog=WebPixEmpresas;Persist Security Info=True;User ID=sa;Password=StaffPro@123;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

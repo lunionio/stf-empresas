@@ -69,21 +69,24 @@ namespace WpEmpresas.Domains
         {
             try
             {
-                await _segService.ValidateTokenAsync(token);
-
-                switch (entity.ID)
+                if (entity != null && !string.IsNullOrEmpty(entity.Numero))
                 {
-                    case 0:
-                        entity.DataCriacao = DateTime.UtcNow;
-                        entity.DateAlteracao = DateTime.UtcNow;
-                        entity.Ativo = true;
-                        entity.ID = _repository.Add(entity);
-                        break;
-                    default:
-                        entity = await UpdateAsync(entity, token);
-                        break;
-                }
+                    await _segService.ValidateTokenAsync(token);
 
+                    switch (entity.ID)
+                    {
+                        case 0:
+                            entity.DataCriacao = DateTime.UtcNow;
+                            entity.DateAlteracao = DateTime.UtcNow;
+                            entity.Ativo = true;
+                            entity.ID = _repository.Add(entity);
+                            break;
+                        default:
+                            entity = await UpdateAsync(entity, token);
+                            break;
+                    }
+
+                }
                 return entity;
             }
             catch (ServiceException e)
@@ -129,7 +132,7 @@ namespace WpEmpresas.Domains
             try
             {
                 //await _segService.ValidateTokenAsync(token);
-                var telefones = _repository.GetList(t => empresasIds.Contains(t.EmpresaId) && t.Ativo);
+                var telefones = _repository.GetList(t => empresasIds.Contains(t.EmpresaId));
 
                 return telefones;
             }

@@ -8,6 +8,8 @@
     <Compile Remove="Migrations\20181009140343_AddingEmpresaInformations.cs" />
     <Compile Remove="Migrations\20181009164927_EmpresaProperties.cs" />
     <Compile Remove="Migrations\20190109162358_TipoEmpresas.cs" />
+    <Compile Remove="Migrations\20190410145316_EmpresaXEspecialidade.cs" />
+    <Compile Remove="Migrations\20190410145451_EmpresaXEspecialidade.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -55,7 +55,7 @@ namespace WpEmpresas.Domains
             try
             {
                 //await _segService.ValidateTokenAsync(token);
-                var result = _repository.GetList(te => ids.Contains(te.ID) && te.Ativo);
+                var result = _repository.GetList(te => ids.Contains(te.ID));
 
                 return result;
             }
@@ -78,8 +78,7 @@ namespace WpEmpresas.Domains
             try
             {
                 await _segService.ValidateTokenAsync(token);
-                var result = _repository.GetList(t => t.ID.Equals(entityId)
-                        && t.Ativo && t.IdCliente.Equals(idCliente)).SingleOrDefault();
+                var result = _repository.GetList(t => t.ID.Equals(entityId) && t.IdCliente.Equals(idCliente)).SingleOrDefault();
 
                 return result;
             }

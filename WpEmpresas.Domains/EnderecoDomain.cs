@@ -156,7 +156,7 @@ namespace WpEmpresas.Domains
             try
             {
                 //await _segService.ValidateTokenAsync(token);
-                var enderecos = _edRepository.GetList(e => empresasIds.Contains(e.EmpresaId) && e.Ativo);
+                var enderecos = _edRepository.GetList(e => empresasIds.Contains(e.EmpresaId));
                 return enderecos;
             }
             catch (ServiceException e)

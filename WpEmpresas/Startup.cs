@@ -32,6 +32,12 @@ namespace WpEmpresas
             services.AddTransient<TelefoneRepository>(); 
             services.AddTransient<TipoEmpresasDomain>();
             services.AddTransient<TipoEmpresaRepository>();
+            services.AddTransient<ResponsavelDomain>(); 
+            services.AddTransient<ResponsavelRepository>(); 
+            services.AddTransient<EmpresaXEspecialidadesDomain>(); 
+            services.AddTransient<EmpresaXEspecialidadeRepository>();
+            services.AddTransient<EspecialidadeRepository>();
+            services.AddTransient<EspecialidadesDomain>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

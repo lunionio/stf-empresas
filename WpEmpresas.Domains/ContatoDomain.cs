@@ -105,7 +105,7 @@ namespace WpEmpresas.Domains
             try
             {
                 //await _segService.ValidateTokenAsync(token);
-                var contatos = _repository.GetList(c => empresasIds.Contains(c.EmpresaId) && c.Ativo);
+                var contatos = _repository.GetList(c => empresasIds.Contains(c.EmpresaId));
 
                 return contatos;
             }
