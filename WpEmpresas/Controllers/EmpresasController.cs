@@ -101,7 +101,8 @@ namespace WpEmpresas.Controllers
 
                 if(ep.ID > 0 && ep.EspecialidadeId > 0)
                 {
-                    oldEXe = _eXeDomain.Save(new EmpresaXEspecialidade(ep.ID, ep.EspecialidadeId));
+                    var result = _eXeDomain.GetByEmpresaId(ep.ID);
+                    oldEXe = _eXeDomain.Save(new EmpresaXEspecialidade(result == null ? 0 : result.ID, ep.ID, ep.EspecialidadeId));
                 }
 
                 return Ok(ep);

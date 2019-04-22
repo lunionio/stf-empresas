@@ -17,6 +17,13 @@ namespace WpEmpresas.Entities
 
         }
 
+        public EmpresaXEspecialidade(int iD, int empresaId, int especialidadeId)
+        {
+            ID = iD;
+            EmpresaId = empresaId;
+            EspecialidadeId = especialidadeId;
+        }
+
         public int ID { get; set; }
         public int EmpresaId { get; set; }
         public int EspecialidadeId { get; set; }

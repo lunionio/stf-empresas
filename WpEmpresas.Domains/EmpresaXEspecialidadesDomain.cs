@@ -92,6 +92,20 @@ namespace WpEmpresas.Domains
             }
         }
 
+        public EmpresaXEspecialidade GetByEmpresaId(int empresaId)
+        {
+            try
+            {
+                var result = _repository.GetSingle(mXe => mXe.EmpresaId.Equals(empresaId));               
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new EspecialidadeException("Não foi possível recuperar os registros solicitados.", e);
+            }
+        }
+
         public IEnumerable<EmpresaXEspecialidade> GetByIds(IEnumerable<int> ids, int idCliente)
         {
             try

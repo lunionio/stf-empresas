@@ -18,8 +18,8 @@ namespace WpEmpresas.Infraestructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            //optionsBuilder.UseSqlServer(@"Server=WIN-2V8OOHSRMOD;Database=WebPixEmpresas;Trusted_Connection=True;Integrated Security = True;");
-            optionsBuilder.UseSqlServer(@"Data Source=18.229.17.132;Initial Catalog=WebPixEmpresas;Persist Security Info=True;User ID=sa;Password=StaffPro@123;");
+            optionsBuilder.UseSqlServer(@"Server=TSERVICES\SQLEXPRESS;Database=WebPixEmpresas;Trusted_Connection=True;Integrated Security = True;");
+            //optionsBuilder.UseSqlServer(@"Data Source=18.229.17.132;Initial Catalog=WebPixEmpresas;Persist Security Info=True;User ID=sa;Password=StaffPro@123;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
