@@ -20,6 +20,10 @@ namespace WpEmpresas.Entities
         public int TipoEmpresaId { get; set; }
         public TipoEmpresa TipoEmpresa { get; set; }
 
+        public string NomeResponsavel { get; set; }
+        public string EmailResponsavel { get; set; }
+        public string CpfResponsavel { get; set; }
+
         public int ResponsavelId { get; set; }
         public Responsavel Responsavel { get; set; }
 
