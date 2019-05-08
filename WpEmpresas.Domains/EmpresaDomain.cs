@@ -124,7 +124,7 @@ namespace WpEmpresas.Domains
                     case 0:
                         entity.DataCriacao = DateTime.UtcNow;
                         entity.DateAlteracao = DateTime.UtcNow;
-                        entity.Ativo = true;
+                        //entity.Ativo = true;
                         entity.ID = _repository.Add(entity);
                         entity.Endereco.EmpresaId = entity.ID;
 

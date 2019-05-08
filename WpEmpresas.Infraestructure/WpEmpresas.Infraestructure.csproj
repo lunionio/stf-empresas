@@ -10,6 +10,16 @@
     <Compile Remove="Migrations\20190109162358_TipoEmpresas.cs" />
     <Compile Remove="Migrations\20190410145316_EmpresaXEspecialidade.cs" />
     <Compile Remove="Migrations\20190410145451_EmpresaXEspecialidade.cs" />
+    <Compile Remove="Migrations\20190507154837_ResponsavelEmpresa.cs" />
+    <Compile Remove="Migrations\20190507154837_ResponsavelEmpresa.Designer.cs" />
+    <Compile Remove="Migrations\20190507155002_ResponsavelEmpresa.cs" />
+    <Compile Remove="Migrations\20190507155002_ResponsavelEmpresa.Designer.cs" />
+    <Compile Remove="Migrations\20190507155041_ResponsavelEmpresa.cs" />
+    <Compile Remove="Migrations\20190507155041_ResponsavelEmpresa.Designer.cs" />
+    <Compile Remove="Migrations\20190507155156_ResponsavelEmpresa.cs" />
+    <Compile Remove="Migrations\20190507155156_ResponsavelEmpresa.Designer.cs" />
+    <Compile Remove="Migrations\20190507155643_ResponsavelEmpresa.cs" />
+    <Compile Remove="Migrations\20190507155643_ResponsavelEmpresa.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
