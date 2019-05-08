@@ -155,12 +155,50 @@ namespace WpEmpresas.Controllers
             }
         }
 
-        [HttpGet("{id:int}/{idCLiente:int}/{token}")]
+        [HttpGet("{id:int}/{idCliente:int}/{token}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute]string token, [FromRoute]int id, [FromRoute]int idCliente)
         {
             try
             {
                 var empresa = await _domain.GetByIdAsync(id, idCliente, token);
+                empresa.Endereco = await _edDomain.GetByEmpresaIdAsync(empresa.ID, idCliente, token);
+                empresa.Contatos = (await _cDomain.GetByEmpresaIdAsync(empresa.ID, idCliente, token)).ToList();
+                empresa.Telefone = await _tDomain.GetByEmpresaIdAsync(empresa.ID, idCliente, token);
+                empresa.TipoEmpresa = await _teDomain.GetByIdAsync(empresa.TipoEmpresaId, idCliente, token);
+                empresa.Responsavel = _rDomain.GetById(empresa.ResponsavelId);
+                empresa.Especialidade = _eXeDomain.GetByEmpresaId(empresa.ID, empresa.IdCliente);
+
+                if (empresa.Especialidade != null)
+                {
+                    empresa.EspecialidadeId = empresa.Especialidade.ID;
+                }
+
+                return Ok(empresa);
+            }
+            catch (InvalidTokenException e)
+            {
+                return StatusCode(401, $"{ e.Message } { e.InnerException.Message }");
+            }
+            catch (EmpresaException e)
+            {
+                return StatusCode(400, $"{ e.Message } { e.InnerException.Message }");
+            }
+            catch (ServiceException e)
+            {
+                return StatusCode(400, $"{ e.Message } { e.InnerException.Message }");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Ocorreu um erro ao tentar recuperar a empresa solicitada. Entre em contato com o suporte.");
+            }
+        }
+
+        [HttpGet("GetByIdExterno/{idExterno:int}/{idCliente:int}/{token}")]
+        public async Task<IActionResult> GetByIdExternoAsync([FromRoute]string token, [FromRoute]int idExterno, [FromRoute]int idCliente)
+        {
+            try
+            {
+                var empresa = await _domain.GetByIdExternoAsync(idExterno, idCliente, token);
                 empresa.Endereco = await _edDomain.GetByEmpresaIdAsync(empresa.ID, idCliente, token);
                 empresa.Contatos = (await _cDomain.GetByEmpresaIdAsync(empresa.ID, idCliente, token)).ToList();
                 empresa.Telefone = await _tDomain.GetByEmpresaIdAsync(empresa.ID, idCliente, token);

@@ -185,5 +185,10 @@ namespace WpEmpresas.Domains
                 throw new EmpresaException("Não foi possível atualizar a empresa informada. Entre em contato com o suporte.", e);
             }
         }
+
+        public Task<Empresa> GetByIdExternoAsync(int idExterno, int idCliente, string token)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
