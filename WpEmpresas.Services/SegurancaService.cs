@@ -1,6 +1,9 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using WpEmpresas.Entities;
 using WpEmpresas.Infraestructure.Exceptions;
 
 namespace WpEmpresas.Services
@@ -46,6 +49,18 @@ namespace WpEmpresas.Services
             {
                 throw new ServiceException("Não foi possível verificar o token informado.", e);
             }
+        }
+
+        public static async Task<IEnumerable<UsuarioXPerfil>> GetUsuariosAsync(int idPerfil)
+        {
+
+            RestClient client = new RestClient("http://localhost:5300/");
+            var url = "/api/Perfil/GetUsersIdsByPerfil/" + idPerfil;
+            RestRequest request = null;
+            request = new RestRequest(url, Method.GET);
+            var response = await client.ExecuteTaskAsync(request);
+
+            return JsonConvert.DeserializeObject<IEnumerable<UsuarioXPerfil>>(response.Content);
         }
     }
 }

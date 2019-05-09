@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using WpEmpresas.Domains;
 using WpEmpresas.Entities;
 using WpEmpresas.Infraestructure.Exceptions;
+using WpEmpresas.Services;
+using WpEmpresas.Services.Helpers;
 
 namespace WpEmpresas.Controllers
 {
@@ -103,6 +105,23 @@ namespace WpEmpresas.Controllers
                 {
                     var result = _eXeDomain.GetByEmpresaId(ep.ID);
                     oldEXe = _eXeDomain.Save(new EmpresaXEspecialidade(result == null ? 0 : result.ID, ep.ID, ep.EspecialidadeId));
+                }
+
+                if (empresa.IdCliente == 12 && "saudesite".Equals(empresa.Origem))
+                {
+                    var perfis = await SegurancaService.GetUsuariosAsync(13);
+                    var admins = await UsuarioService.GetByIdsAsync(12, perfis.Select(x => x.IdUsuario));
+
+                    var email = new EmailHandler();
+
+                    if (empresa.TipoEmpresaId == 1)
+                    {
+                        await email.EnviarEmailAsync(empresa.Tipo, empresa.ID, admins);
+                    }
+                    else if(empresa.TipoEmpresaId == 3)
+                    {
+                        await email.EnviarEmailAsync(empresa.Tipo, empresa.CodigoExterno, admins);
+                    }
                 }
 
                 return Ok(ep);
