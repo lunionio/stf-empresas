@@ -186,9 +186,27 @@ namespace WpEmpresas.Domains
             }
         }
 
-        public Task<Empresa> GetByIdExternoAsync(int idExterno, int idCliente, string token)
+        public async Task<Empresa> GetByIdExternoAsync(int idExterno, int idCliente, string token)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _segService.ValidateTokenAsync(token);
+                var result = _repository.GetList(e => e.CodigoExterno.Equals(idExterno) && e.IdCliente.Equals(idCliente)).SingleOrDefault();
+
+                return result;
+            }
+            catch (InvalidTokenException e)
+            {
+                throw e;
+            }
+            catch (ServiceException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw new EmpresaException("Não foi possível recuperar a empresa solicitada.", e);
+            }
         }
     }
 }
