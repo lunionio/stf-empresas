@@ -99,12 +99,38 @@ namespace WpEmpresas.Controllers
                 ep.Telefone = await _tDomain.SaveAsync(ep.Telefone, token);
                 ep.Responsavel = empresa.Responsavel;
 
-                var oldEXe = default(EmpresaXEspecialidade);
+                //var oldEXe = default(EmpresaXEspecialidade);
 
-                if(ep.ID > 0 && ep.EspecialidadeId > 0)
+                //if(ep.ID > 0 && ep.EspecialidadeId > 0)
+                //{
+                //    var result = _eXeDomain.GetByEmpresaId(ep.ID);
+                //    oldEXe = _eXeDomain.Save(new EmpresaXEspecialidade(result == null ? 0 : result.ID, ep.ID, ep.EspecialidadeId));
+                //}
+
+                var oeXe = new EmpresaXEspecialidade();
+
+                if (empresa.idsEspecialidades != null)
                 {
-                    var result = _eXeDomain.GetByEmpresaId(ep.ID);
-                    oldEXe = _eXeDomain.Save(new EmpresaXEspecialidade(result == null ? 0 : result.ID, ep.ID, ep.EspecialidadeId));
+                    oeXe.EmpresaId = ep.ID;
+
+                    var bExe = _eXeDomain.GetByIdEmpresa(oeXe.EmpresaId);
+                    if (bExe.Count() > 0)
+                    {
+                        for (int i = 0; i < bExe.Count(); i++)
+                        {
+                            oeXe.ID = bExe.ElementAtOrDefault(i).ID;
+
+                            _eXeDomain.Delete(oeXe);
+                        }
+                    }
+
+                    foreach (var item in empresa.idsEspecialidades)
+                    {
+                        oeXe.ID = 0;
+                        oeXe.EspecialidadeId = item;
+
+                        var mXc = _eXeDomain.Save(oeXe);
+                    }
                 }
 
                 if (empresa.IdCliente == 12 && "saudesite".Equals(empresa.Origem))
@@ -123,6 +149,8 @@ namespace WpEmpresas.Controllers
                         await email.EnviarEmailAsync(empresa.Tipo, empresa.CodigoExterno, admins);
                     }
                 }
+
+                
 
                 return Ok(ep);
             }

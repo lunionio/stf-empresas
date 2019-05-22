@@ -35,5 +35,8 @@ namespace WpEmpresas.Entities
         public string Origem { get; set; }
         [NotMapped]
         public int Tipo { get; set; }
+
+        [NotMapped]
+        public List<int> idsEspecialidades { get; set; }
     }
 }

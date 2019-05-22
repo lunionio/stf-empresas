@@ -1,9 +1,9 @@
-﻿using SaudeComVoce.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using WpEmpresas.Entities;
+using WpEmpresas.Services.Helpers;
 
 namespace WpEmpresas.Services
 {

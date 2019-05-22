@@ -58,6 +58,19 @@ namespace WpEmpresas.Domains
             }
         }
 
+        public void Delete(EmpresaXEspecialidade entity)
+        {
+            try
+            {
+                _repository.Remove(entity);
+                //return result;
+            }
+            catch (Exception e)
+            {
+                throw new EspecialidadeException("Não foi possível recuperar a empresa disponível.", e);
+            }
+        }
+
         public IEnumerable<EmpresaXEspecialidade> GetByEmpresasIds(IEnumerable<int> empresasIds)
         {
             try
@@ -116,6 +129,19 @@ namespace WpEmpresas.Domains
             catch (Exception e)
             {
                 throw new EspecialidadeException("Não foi possível buscar os medicos solicitados.", e);
+            }
+        }
+
+        public IEnumerable<EmpresaXEspecialidade> GetByIdEmpresa(int empresaId)
+        {
+            try
+            {
+                var result = _repository.GetList(eXe => eXe.EmpresaId.Equals(empresaId));
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new EspecialidadeException("Não foi possível recuperar os registros solicitados.", e);
             }
         }
     }
