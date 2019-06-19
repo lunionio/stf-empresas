@@ -278,6 +278,48 @@ namespace WpEmpresas.Controllers
             }
         }
 
+        [HttpGet("GetByEmail/{email}/{token}")]
+        public async Task<IActionResult> GetByEmailAsync([FromRoute]string token,[FromRoute]string email)
+        {
+            try
+            {
+                var empresa = await _domain.GetByEmailAsync(email, token);
+                empresa.Endereco = await _edDomain.GetByEmpresaIdAsync(empresa.ID, empresa.IdCliente, token);
+                empresa.Telefone = await _tDomain.GetByEmpresaIdAsync(empresa.ID, empresa.IdCliente, token);
+                empresa.TipoEmpresa = await _teDomain.GetByIdAsync(empresa.TipoEmpresaId, empresa.IdCliente, token);
+
+                if (empresa.IdCliente == 12)
+                {
+                    empresa.Responsavel = _rDomain.GetById(empresa.ResponsavelId);
+                    empresa.Especialidade = _eXeDomain.GetByEmpresaId(empresa.ID, empresa.IdCliente);
+                    empresa.Contatos = (await _cDomain.GetByEmpresaIdAsync(empresa.ID, empresa.IdCliente, token)).ToList();
+                }
+
+                if (empresa.Especialidade != null && empresa.IdCliente == 12)
+                {
+                    empresa.EspecialidadeId = empresa.Especialidade.ID;
+                }
+
+                return Ok(empresa);
+            }
+            catch (InvalidTokenException e)
+            {
+                return StatusCode(401, $"{ e.Message } { e.InnerException.Message }");
+            }
+            catch (EmpresaException e)
+            {
+                return StatusCode(400, $"{ e.Message } { e.InnerException.Message }");
+            }
+            catch (ServiceException e)
+            {
+                return StatusCode(400, $"{ e.Message } { e.InnerException.Message }");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Ocorreu um erro ao tentar recuperar a empresa solicitada. Entre em contato com o suporte.");
+            }
+        }
+
         [HttpGet("GetByTipo/{idCliente:int}/{tipoId:int}/{token}")]
         public async Task<IActionResult> GetByTipoAsync([FromRoute]int idCliente, [FromRoute]int tipoId, [FromRoute]string token)
         {

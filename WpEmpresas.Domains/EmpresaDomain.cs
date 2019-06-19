@@ -208,5 +208,28 @@ namespace WpEmpresas.Domains
                 throw new EmpresaException("Não foi possível recuperar a empresa solicitada.", e);
             }
         }
+
+        public async Task<Empresa> GetByEmailAsync(string email, string token)
+        {
+            try
+            {
+                await _segService.ValidateTokenAsync(token);
+                var result = _repository.GetList(e => e.Email.Equals(email)).SingleOrDefault();
+
+                return result;
+            }
+            catch (InvalidTokenException e)
+            {
+                throw e;
+            }
+            catch (ServiceException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw new EmpresaException("Não foi possível recuperar a empresa solicitada.", e);
+            }
+        }
     }
 }
