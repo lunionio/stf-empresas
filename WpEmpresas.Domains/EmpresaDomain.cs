@@ -186,12 +186,12 @@ namespace WpEmpresas.Domains
             }
         }
 
-        public async Task<Empresa> GetByIdExternoAsync(int idExterno, int idCliente, string token)
+        public async Task<IEnumerable<Empresa>> GetByIdExternoAsync(int idExterno, int idCliente, string token)
         {
             try
             {
                 await _segService.ValidateTokenAsync(token);
-                var result = _repository.GetList(e => e.CodigoExterno.Equals(idExterno) && e.IdCliente.Equals(idCliente)).SingleOrDefault();
+                var result = _repository.GetList(e => e.CodigoExterno.Equals(idExterno) && e.IdCliente.Equals(idCliente));
 
                 return result;
             }

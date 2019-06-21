@@ -246,17 +246,22 @@ namespace WpEmpresas.Controllers
             try
             {
                 var empresa = await _domain.GetByIdExternoAsync(idExterno, idCliente, token);
-                empresa.Endereco = await _edDomain.GetByEmpresaIdAsync(empresa.ID, idCliente, token);
-                empresa.Contatos = (await _cDomain.GetByEmpresaIdAsync(empresa.ID, idCliente, token)).ToList();
-                empresa.Telefone = await _tDomain.GetByEmpresaIdAsync(empresa.ID, idCliente, token);
-                empresa.TipoEmpresa = await _teDomain.GetByIdAsync(empresa.TipoEmpresaId, idCliente, token);
-                empresa.Responsavel = _rDomain.GetById(empresa.ResponsavelId);
-                empresa.Especialidade = _eXeDomain.GetByEmpresaId(empresa.ID, empresa.IdCliente);
 
-                if (empresa.Especialidade != null)
+                for (int i = 0; i < empresa.Count(); i++)
                 {
-                    empresa.EspecialidadeId = empresa.Especialidade.ID;
+                    empresa.ElementAtOrDefault(i).Endereco = await _edDomain.GetByEmpresaIdAsync(empresa.ElementAtOrDefault(i).ID, idCliente, token);
+                    empresa.ElementAtOrDefault(i).Contatos = (await _cDomain.GetByEmpresaIdAsync(empresa.ElementAtOrDefault(i).ID, idCliente, token)).ToList();
+                    empresa.ElementAtOrDefault(i).Telefone = await _tDomain.GetByEmpresaIdAsync(empresa.ElementAtOrDefault(i).ID, idCliente, token);
+                    empresa.ElementAtOrDefault(i).TipoEmpresa = await _teDomain.GetByIdAsync(empresa.ElementAtOrDefault(i).TipoEmpresaId, idCliente, token);
+                    empresa.ElementAtOrDefault(i).Responsavel = _rDomain.GetById(empresa.ElementAtOrDefault(i).ResponsavelId);
+                    empresa.ElementAtOrDefault(i).Especialidade = _eXeDomain.GetByEmpresaId(empresa.ElementAtOrDefault(i).ID, empresa.ElementAtOrDefault(i).IdCliente);
+
+                    if (empresa.ElementAtOrDefault(i).Especialidade != null)
+                    {
+                        empresa.ElementAtOrDefault(i).EspecialidadeId = empresa.ElementAtOrDefault(i).Especialidade.ID;
+                    }
                 }
+                
 
                 return Ok(empresa);
             }
