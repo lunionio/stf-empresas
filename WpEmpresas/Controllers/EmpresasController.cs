@@ -96,6 +96,11 @@ namespace WpEmpresas.Controllers
                 var ep = await _domain.SaveAsync(empresa, token);
                 ep.Endereco = await _edDomain.SaveAsync(ep.Endereco, token);
                 await _cDomain.SaveAsync(ep.Contatos, token);
+                if (empresa.TipoEmpresaId == 4)
+                {
+                    empresa.Telefone.EmpresaId = empresa.ID;
+                    empresa.Endereco.EmpresaId = empresa.ID;
+                }
                 ep.Telefone = await _tDomain.SaveAsync(ep.Telefone, token);
                 ep.Responsavel = empresa.Responsavel;
 
